@@ -1,0 +1,62 @@
+<section id="projects" class="projects">
+  <div class="projects-container">
+    <!-- Section Header -->
+    <div class="section-header animate-float-up">
+      <span class="section-number">07</span>
+      <h2 class="section-title">Research Projects</h2>
+      <p class="section-subtitle">Analytical & Laboratory Research</p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      <div *ngFor="let project of projects; let i = index" 
+           class="project-card animate-stagger-{{ i + 1 }}"
+           [style.animation-delay]="(i * 100) + 'ms'">
+        
+        <!-- Card Background Gradient -->
+        <div class="card-gradient"></div>
+
+        <!-- Card Content -->
+        <div class="card-content">
+          <!-- Icon -->
+          <div class="project-icon">{{ project.icon }}</div>
+
+          <!-- Title -->
+          <h3 class="project-title">{{ project.title }}</h3>
+
+          <!-- Description -->
+          <p class="project-description">{{ project.description }}</p>
+
+          <!-- Research Focus -->
+          <div class="focus-areas">
+            <p class="focus-label">Research Focus:</p>
+            <div class="focus-items">
+              <span *ngFor="let focus of project.focus" class="focus-badge">
+                {{ focus }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Tools & Technologies -->
+          <div class="tools-used">
+            <p class="tools-label">Tools & Techniques:</p>
+            <div class="tools-items">
+              <span *ngFor="let tool of project.tools" class="tool-badge">
+                {{ tool }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <button class="project-btn">
+            <span>View Details</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <!-- Hover Effect Layer -->
+        <div class="card-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>

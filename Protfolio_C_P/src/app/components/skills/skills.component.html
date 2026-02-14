@@ -1,0 +1,96 @@
+<section id="skills" class="skills">
+  <!-- Chemistry Decorations -->
+  <div class="chem-deco" aria-hidden="true">
+    <div class="chem-obj chem-microscope">🔬</div>
+    <div class="chem-obj chem-petri">🧫</div>
+    <div class="chem-obj chem-droplet">💧</div>
+    <div class="chem-obj chem-fire">🔥</div>
+  </div>
+
+  <div class="skills-container">
+    <!-- Section Header -->
+    <div class="section-header animate-float-up">
+      <span class="section-number">04</span>
+      <h2 class="section-title">Technical Skills</h2>
+      <p class="section-subtitle">Laboratory & Analytical Expertise</p>
+    </div>
+
+    <!-- Laboratory Analysis Skills -->
+    <div class="skill-category animate-slide-in-up" style="animation-delay: 100ms">
+      <h3 class="category-title">
+        <span class="category-icon">🧪</span>
+        Laboratory Analysis
+      </h3>
+      <div class="skills-grid">
+        <div
+          *ngFor="let skill of analysisSkills; let i = index"
+          class="skill-card animate-stagger-{{ i + 1 }}"
+          [style.animation-delay]="(i * 100) + 'ms'"
+        >
+          <div class="skill-header">
+            <span class="skill-icon">{{ skill.icon }}</span>
+            <h4 class="skill-name">{{ skill.name }}</h4>
+          </div>
+          <div class="skill-proficiency">
+            <div class="proficiency-bar">
+              <div class="proficiency-fill" [style.width]="skill.proficiency + '%'"></div>
+            </div>
+            <span class="proficiency-text">{{ skill.proficiency }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instrumentation Skills -->
+    <div class="skill-category animate-slide-in-up" style="animation-delay: 200ms">
+      <h3 class="category-title">
+        <span class="category-icon">🔬</span>
+        Instrumentation
+      </h3>
+      <div class="skills-grid">
+        <div
+          *ngFor="let skill of instrumentationSkills; let i = index"
+          class="skill-card animate-stagger-{{ i + 1 }}"
+          [style.animation-delay]="(i * 100) + 'ms'"
+        >
+          <div class="skill-header">
+            <span class="skill-icon">{{ skill.icon }}</span>
+            <h4 class="skill-name">{{ skill.name }}</h4>
+          </div>
+          <div class="skill-proficiency">
+            <div class="proficiency-bar">
+              <div class="proficiency-fill" [style.width]="skill.proficiency + '%'"></div>
+            </div>
+            <span class="proficiency-text">{{ skill.proficiency }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Software Skills -->
+    <div class="skill-category animate-slide-in-up" style="animation-delay: 300ms">
+      <h3 class="category-title">
+        <span class="category-icon">💻</span>
+        Software & Tools
+      </h3>
+      <div class="skills-grid">
+        <div
+          *ngFor="let skill of softwareSkills; let i = index"
+          class="skill-card animate-stagger-{{ i + 1 }}"
+          [style.animation-delay]="(i * 100) + 'ms'"
+        >
+          <div class="skill-header">
+            <span class="skill-icon">{{ skill.icon }}</span>
+            <h4 class="skill-name">{{ skill.name }}</h4>
+          </div>
+          <div class="skill-proficiency">
+            <div class="proficiency-bar">
+              <div class="proficiency-fill" [style.width]="skill.proficiency + '%'"></div>
+            </div>
+            <span class="proficiency-text">{{ skill.proficiency }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

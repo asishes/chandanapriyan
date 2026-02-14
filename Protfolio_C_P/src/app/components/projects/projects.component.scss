@@ -1,0 +1,403 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/animations';
+
+.projects {
+  position: relative;
+  @include section;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 50%, #EFF6FF 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.3), transparent);
+  }
+}
+
+.projects-container {
+  @include container;
+}
+
+/* ==================== SECTION HEADER ==================== */
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  margin-bottom: $space-4xl;
+  text-align: center;
+
+  @include md {
+    margin-bottom: $space-3xl;
+  }
+}
+
+.section-number {
+  @include heading($font-size-xl, $font-weight-bold);
+  @include text-gradient;
+  font-size: $font-size-sm;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}
+
+.section-title {
+  @include heading($font-size-5xl, $font-weight-bold);
+  margin: 0;
+
+  @include lg {
+    @include heading($font-size-4xl, $font-weight-bold);
+  }
+
+  @include md {
+    @include heading($font-size-3xl, $font-weight-bold);
+  }
+}
+
+.section-subtitle {
+  @include body-text($font-size-lg, $font-weight-normal, $color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+
+  @include md {
+    @include body-text($font-size-base, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+/* ==================== PROJECTS GRID ==================== */
+
+.projects-grid {
+  @include grid-responsive($cols-lg: 3, $cols-md: 2, $cols-sm: 1, $gap: $space-2xl);
+
+  @include md {
+    @include grid-responsive($cols-lg: 2, $cols-md: 2, $cols-sm: 1, $gap: $space-lg);
+  }
+
+  @include sm {
+    gap: $space-md;
+  }
+}
+
+/* ==================== PROJECT CARD ==================== */
+
+.project-card {
+  position: relative;
+  height: 100%;
+  min-height: 450px;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  cursor: pointer;
+  background: $color-primary-dark;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  @include transition-all;
+  @include smooth-shadow;
+
+  @include md {
+    min-height: 400px;
+  }
+
+  @include sm {
+    min-height: 350px;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 212, 170, 0.5);
+
+    .card-gradient {
+      opacity: 1;
+    }
+
+    .project-icon {
+      transform: scale(1.1) translateY(-4px);
+    }
+
+    .project-title {
+      color: $color-accent-mocha;
+    }
+
+    .project-btn {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg, $shadow-glow;
+
+      .arrow {
+        transform: translateX(4px);
+      }
+    }
+
+    .card-overlay {
+      opacity: 1;
+    }
+  }
+}
+
+/* ==================== CARD GRADIENT BACKGROUND ==================== */
+
+.card-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(0, 212, 170, 0.05) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity $transition-base;
+  pointer-events: none;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top-right, rgba(0, 212, 170, 0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity $transition-base;
+  pointer-events: none;
+}
+
+/* ==================== CARD CONTENT ==================== */
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  padding: $space-2xl;
+
+  @include md {
+    padding: $space-lg;
+    gap: $space-sm;
+  }
+
+  @include sm {
+    padding: $space-md;
+  }
+}
+
+/* ==================== PROJECT ICON ==================== */
+
+.project-icon {
+  font-size: $font-size-4xl;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 212, 170, 0.15);
+  border-radius: $radius-lg;
+  transition: all $transition-base;
+
+  @include md {
+    font-size: $font-size-3xl;
+    width: 50px;
+    height: 50px;
+  }
+
+  @include sm {
+    font-size: $font-size-2xl;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* ==================== PROJECT TITLE ==================== */
+
+.project-title {
+  @include heading($font-size-xl, $font-weight-bold);
+  margin: $space-md 0 0 0;
+  transition: color $transition-base;
+
+  @include md {
+    @include heading($font-size-lg, $font-weight-bold);
+  }
+
+  @include sm {
+    @include heading($font-size-base, $font-weight-bold);
+    margin-top: $space-sm;
+  }
+}
+
+/* ==================== PROJECT DESCRIPTION ==================== */
+
+.project-description {
+  @include body-text($font-size-sm, $font-weight-normal, $color-text-secondary);
+  margin: 0;
+  flex: 1;
+  line-height: $line-height-relaxed;
+
+  @include sm {
+    @include body-text($font-size-xs, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+/* ==================== TECH STACK ==================== */
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  margin: $space-md 0 0 0;
+}
+
+.tech-badge {
+  display: inline-flex;
+  padding: $space-xs $space-md;
+  background: rgba(167, 120, 94, 0.1);
+  border: 1px solid rgba(167, 120, 94, 0.3);
+  border-radius: $radius-lg;
+  font-size: $font-size-xs;
+  color: $color-accent-mocha;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+
+  @include sm {
+    padding: $space-xs 8px;
+    font-size: 10px;
+  }
+}
+
+/* ==================== ARCHITECTURE ==================== */
+
+.architecture {
+  margin-top: auto;
+  padding-top: $space-lg;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  @include md {
+    padding-top: $space-md;
+  }
+}
+
+.arch-label {
+  @include body-text($font-size-xs, $font-weight-semibold, $color-text-muted);
+  margin: 0 0 $space-md 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  @include sm {
+    margin: 0 0 $space-sm 0;
+  }
+}
+
+.arch-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+}
+
+.arch-badge {
+  display: inline-flex;
+  padding: $space-xs $space-md;
+  background: rgba(74, 124, 89, 0.1);
+  border: 1px solid rgba(74, 124, 89, 0.3);
+  border-radius: $radius-lg;
+  font-size: $font-size-xs;
+  color: $color-accent-green;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+
+  @include sm {
+    padding: $space-xs 8px;
+    font-size: 10px;
+  }
+}
+
+/* ==================== PROJECT BUTTON ==================== */
+
+.project-btn {
+  width: 100%;
+  margin-top: $space-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-md;
+  @include btn-primary;
+
+  @include md {
+    padding: $space-md $space-lg;
+    font-size: $font-size-sm;
+    margin-top: $space-sm;
+  }
+
+  @include sm {
+    padding: $space-sm $space-md;
+    font-size: $font-size-xs;
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform $transition-base;
+  }
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@for $i from 1 through 6 {
+  .project-card.animate-stagger-#{$i} {
+    animation: float-up 0.6s ease-out;
+  }
+}
+
+/* ==================== LIGHT MODE ==================== */
+
+body.light-mode {
+  .project-card {
+    background: #ffffff;
+    border-color: rgba(102, 126, 234, 0.1);
+
+    &:hover {
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+  }
+
+  .card-gradient {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(90, 103, 216, 0.04) 50%, transparent 100%);
+  }
+
+  .project-title {
+    color: #1a202c;
+
+    &:hover {
+      color: #667eea;
+    }
+  }
+
+  .project-description {
+    color: #4a5568;
+  }
+
+  .project-icon {
+    background: rgba(102, 126, 234, 0.1);
+  }
+
+  .tech-badge {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.3);
+    color: #667eea;
+  }
+
+  .arch-badge {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: #9333ea;
+  }
+
+  .architecture {
+    border-top-color: rgba(102, 126, 234, 0.1);
+  }
+
+  .arch-label {
+    color: #718096;
+  }
+}

@@ -1,0 +1,41 @@
+<section id="education" class="education">
+  <div class="education-container">
+    <!-- Section Header -->
+    <div class="section-header animate-float-up">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Education</h2>
+      <p class="section-subtitle">Academic Foundation & Specialization</p>
+    </div>
+
+    <!-- Horizontal Timeline -->
+    <div class="timeline-horizontal animate-slide-in-left" style="animation-delay: 200ms">
+      <!-- Timeline Line -->
+      <div class="h-timeline-line"></div>
+
+      <!-- Cards -->
+      <div class="h-timeline-cards">
+        <div *ngFor="let item of educationData; let i = index"
+             class="h-timeline-item"
+             [style.animation-delay]="(i * 120) + 'ms'">
+
+          <!-- Marker -->
+          <div class="h-marker" [class.current]="i === 0">
+            <div class="h-marker-dot"></div>
+            <span class="h-period">{{ item.period }}</span>
+          </div>
+
+          <!-- Card -->
+          <div class="h-card">
+            <h3 class="h-degree">{{ item.degree }}</h3>
+            <p class="h-institution">
+              <span>🏫</span> {{ item.institution }}
+            </p>
+            <ul *ngIf="item.details" class="h-details">
+              <li *ngFor="let detail of item.details">{{ detail }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

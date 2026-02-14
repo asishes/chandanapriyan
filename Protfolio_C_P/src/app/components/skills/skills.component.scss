@@ -1,0 +1,291 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/animations';
+
+.skills {
+  position: relative;
+  @include section;
+  background: linear-gradient(135deg, #EEF2FF 0%, #F8FAFC 50%, #EFF6FF 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.3), transparent);
+  }
+}
+
+.skills-container {
+  @include container;
+}
+
+/* ==================== SECTION HEADER ==================== */
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  margin-bottom: $space-4xl;
+  text-align: center;
+
+  @include md {
+    margin-bottom: $space-3xl;
+  }
+}
+
+.section-number {
+  @include heading($font-size-xl, $font-weight-bold);
+  @include text-gradient;
+  font-size: $font-size-sm;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}
+
+.section-title {
+  @include heading($font-size-5xl, $font-weight-bold);
+  margin: 0;
+
+  @include lg {
+    @include heading($font-size-4xl, $font-weight-bold);
+  }
+
+  @include md {
+    @include heading($font-size-3xl, $font-weight-bold);
+  }
+}
+
+.section-subtitle {
+  @include body-text($font-size-lg, $font-weight-normal, $color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+
+  @include md {
+    @include body-text($font-size-base, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+/* ==================== SKILL CATEGORIES ==================== */
+
+.skill-category {
+  margin-bottom: $space-4xl;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include md {
+    margin-bottom: $space-3xl;
+  }
+}
+
+.category-title {
+  @include heading($font-size-2xl, $font-weight-semibold);
+  margin: 0 0 $space-2xl 0;
+  @include flex;
+  align-items: center;
+  gap: $space-md;
+  color: $color-text-primary;
+
+  @include md {
+    @include heading($font-size-xl, $font-weight-semibold);
+    margin-bottom: $space-lg;
+  }
+
+  .category-icon {
+    font-size: $font-size-2xl;
+    display: inline-block;
+  }
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 212, 170, 0.3), transparent);
+    margin-left: $space-md;
+  }
+}
+
+/* ==================== SKILLS GRID ==================== */
+
+.skills-grid {
+  @include grid-responsive($cols-lg: 4, $cols-md: 3, $cols-sm: 2, $gap: $space-lg);
+
+  @include md {
+    @include grid-responsive($cols-lg: 3, $cols-md: 2, $cols-sm: 2, $gap: $space-md);
+  }
+
+  @include sm {
+    @include grid-responsive($cols-lg: 2, $cols-md: 2, $cols-sm: 1, $gap: $space-md);
+  }
+}
+
+/* ==================== SKILL CARD ==================== */
+
+.skill-card {
+  @include glassmorphism(0.05);
+  padding: $space-xl $space-lg;
+  border-radius: $radius-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  @include transition-all;
+  @include smooth-shadow;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.2), transparent);
+    transition: left $transition-base;
+  }
+
+  &:hover {
+    background: $color-card-bg-hover;
+    transform: translateY(-8px);
+    box-shadow: $shadow-xl, $shadow-glow;
+    border-color: rgba(0, 212, 170, 0.5);
+
+    &::before {
+      left: 100%;
+    }
+
+    .skill-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    .skill-name {
+      color: $color-accent-mocha;
+    }
+  }
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.skill-icon {
+  font-size: $font-size-2xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 212, 170, 0.1);
+  border-radius: $radius-md;
+  transition: all $transition-base;
+
+  @include sm {
+    font-size: $font-size-lg;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.skill-name {
+  @include heading($font-size-sm, $font-weight-semibold);
+  margin: 0;
+  transition: color $transition-base;
+  flex: 1;
+
+  @include sm {
+    @include heading($font-size-xs, $font-weight-semibold);
+  }
+}
+
+/* ==================== PROFICIENCY BAR ==================== */
+
+.skill-proficiency {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.proficiency-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-xl;
+  overflow: hidden;
+  position: relative;
+}
+
+.proficiency-fill {
+  height: 100%;
+  background: $gradient-primary;
+  border-radius: $radius-xl;
+  width: 0;
+  transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: $shadow-glow;
+}
+
+.proficiency-text {
+  @include body-text($font-size-xs, $font-weight-bold, $color-accent-mocha);
+  min-width: 50px;
+  text-align: right;
+  margin: 0;
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@for $i from 1 through 7 {
+  .skill-card.animate-stagger-#{$i} {
+    animation: float-up 0.6s ease-out;
+  }
+}
+
+/* ==================== LIGHT MODE ==================== */
+
+body.light-mode {
+  .category-title {
+    color: #1a202c;
+
+    &::after {
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.3), transparent);
+    }
+  }
+
+  .skill-card {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(102, 126, 234, 0.2);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+
+    .skill-icon {
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .skill-name {
+      color: #1a202c;
+
+      &:hover {
+        color: #667eea;
+      }
+    }
+  }
+
+  .proficiency-text {
+    color: #667eea;
+  }
+
+  .proficiency-bar {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}

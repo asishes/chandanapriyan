@@ -1,0 +1,582 @@
+@import './variables';
+@import './mixins';
+@import './animations';
+
+// GOOGLE FONTS IMPORT
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* ==================== RESET & BASE STYLES ==================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  @include scrollbar;
+}
+
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  color: $color-text-primary;
+  background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 15%, #F8FAFC 30%, #EFF6FF 50%, #F8FAFC 70%, #EEF2FF 85%, #F8FAFC 100%);
+  line-height: $line-height-normal;
+  overflow-x: hidden;
+  letter-spacing: $letter-spacing-normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+
+h1 {
+  @include heading($font-size-6xl, $font-weight-extrabold);
+  margin-bottom: $space-xl;
+
+  @include md {
+    @include heading($font-size-4xl, $font-weight-extrabold);
+  }
+
+  @include sm {
+    @include heading($font-size-3xl, $font-weight-extrabold);
+  }
+}
+
+h2 {
+  @include heading($font-size-5xl, $font-weight-bold);
+  margin-bottom: $space-xl;
+
+  @include md {
+    @include heading($font-size-3xl, $font-weight-bold);
+  }
+
+  @include sm {
+    @include heading($font-size-2xl, $font-weight-bold);
+  }
+}
+
+h3 {
+  @include heading($font-size-3xl, $font-weight-bold);
+  margin-bottom: $space-lg;
+
+  @include md {
+    @include heading($font-size-2xl, $font-weight-bold);
+  }
+}
+
+h4 {
+  @include heading($font-size-2xl, $font-weight-semibold);
+  margin-bottom: $space-lg;
+
+  @include md {
+    @include heading($font-size-xl, $font-weight-semibold);
+  }
+}
+
+h5 {
+  @include heading($font-size-lg, $font-weight-semibold);
+  margin-bottom: $space-sm;
+}
+
+h6 {
+  @include heading($font-size-base, $font-weight-semibold);
+  margin-bottom: $space-sm;
+}
+
+p {
+  @include body-text($font-size-base, $font-weight-normal, $color-text-secondary);
+  margin-bottom: $space-lg;
+  letter-spacing: $letter-spacing-normal;
+}
+
+small {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+/* ==================== LINKS ==================== */
+
+a {
+  color: $color-accent-mocha;
+  text-decoration: none;
+  @include transition-all;
+  position: relative;
+  font-weight: 500;
+
+  &:hover {
+    color: $color-accent-green;
+    text-decoration: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, $color-accent-mocha, $color-accent-secondary);
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+/* ==================== BUTTONS ==================== */
+
+button {
+  cursor: pointer;
+  @include transition-all;
+  border: none;
+  font-family: $font-family-primary;
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-mocha;
+    outline-offset: 2px;
+  }
+}
+
+.btn {
+  @include btn-base;
+
+  &.btn-primary {
+    @include btn-primary;
+  }
+
+  &.btn-secondary {
+    @include btn-secondary;
+  }
+
+  &.btn-sm {
+    padding: $space-sm $space-md;
+    font-size: $font-size-sm;
+  }
+
+  &.btn-lg {
+    padding: $space-lg $space-2xl;
+    font-size: $font-size-lg;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* ==================== INPUTS ==================== */
+
+input,
+textarea,
+select {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: $radius-md;
+  padding: $space-md;
+  @include transition-all;
+  letter-spacing: $letter-spacing-normal;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-mocha;
+    background: #FFFFFF;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+  }
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+
+.container {
+  @include container;
+}
+
+.section {
+  @include section;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+.grid {
+  display: grid;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.bold {
+  font-weight: $font-weight-bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.truncate {
+  @include ellipsis(1);
+}
+
+.line-clamp-2 {
+  @include ellipsis(2);
+}
+
+.line-clamp-3 {
+  @include ellipsis(3);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+/* ==================== SCROLLBAR ==================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-accent-mocha;
+  border-radius: $radius-lg;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+/* ==================== DARK MODE SUPPORT ==================== */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: $color-primary-dark;
+    color: $color-text-primary;
+  }
+}
+
+/* ==================== CREATIVE CARDS ==================== */
+
+.card-creative {
+  @include glassmorphism;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(37, 99, 235, 0.05), transparent);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    border-color: rgba(37, 99, 235, 0.3);
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.12);
+    transform: translateY(-4px);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.card-glow {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  border-radius: $radius-xl;
+  padding: $space-lg;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+  }
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ==================== RESPONSIVE UTILITIES ==================== */
+
+@include sm {
+  h1 {
+    word-break: break-word;
+  }
+
+  button,
+  .btn {
+    width: 100%;
+  }
+}
+
+/* ==================== CHEMISTRY DECORATIONS ==================== */
+
+.chem-deco {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.chem-obj {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.35;
+  filter: saturate(2) brightness(1.2);
+  will-change: transform;
+
+  @include sm {
+    font-size: 2.2rem;
+    opacity: 0.25;
+  }
+}
+
+// About section chemistry objects
+.chem-beaker {
+  top: 8%;
+  right: 6%;
+  font-size: 3.5rem;
+  animation: chem-float-1 8s ease-in-out infinite;
+  filter: saturate(2.5) hue-rotate(-10deg);
+}
+
+.chem-atom {
+  bottom: 15%;
+  left: 4%;
+  font-size: 3rem;
+  animation: chem-float-2 10s ease-in-out infinite;
+  animation-delay: 1s;
+  filter: saturate(2.5) hue-rotate(30deg);
+}
+
+.chem-flask {
+  top: 40%;
+  right: 3%;
+  font-size: 2.8rem;
+  animation: chem-float-3 7s ease-in-out infinite;
+  animation-delay: 2s;
+  filter: saturate(2.2) hue-rotate(60deg);
+}
+
+.chem-molecule {
+  bottom: 8%;
+  right: 15%;
+  font-size: 3.2rem;
+  animation: chem-float-1 9s ease-in-out infinite;
+  animation-delay: 0.5s;
+  filter: saturate(2.5) hue-rotate(-20deg);
+}
+
+// Skills section chemistry objects
+.chem-microscope {
+  top: 5%;
+  left: 5%;
+  font-size: 3.5rem;
+  animation: chem-float-2 9s ease-in-out infinite;
+  filter: saturate(2.2) hue-rotate(10deg);
+}
+
+.chem-petri {
+  top: 20%;
+  right: 4%;
+  font-size: 3rem;
+  animation: chem-float-3 8s ease-in-out infinite;
+  animation-delay: 1.5s;
+  filter: saturate(2.5) hue-rotate(40deg);
+}
+
+.chem-droplet {
+  bottom: 12%;
+  left: 8%;
+  font-size: 2.8rem;
+  animation: chem-float-1 7s ease-in-out infinite;
+  animation-delay: 3s;
+  filter: saturate(3) hue-rotate(-30deg);
+}
+
+.chem-fire {
+  bottom: 25%;
+  right: 10%;
+  font-size: 3rem;
+  animation: chem-float-2 10s ease-in-out infinite;
+  animation-delay: 0.8s;
+  filter: saturate(2.5) hue-rotate(15deg);
+}
+
+// Experience section chemistry objects
+.chem-flask-2 {
+  top: 10%;
+  right: 5%;
+  font-size: 3.2rem;
+  animation: chem-float-3 9s ease-in-out infinite;
+  filter: saturate(2.5) hue-rotate(50deg);
+}
+
+.chem-tube {
+  bottom: 20%;
+  left: 3%;
+  font-size: 3rem;
+  animation: chem-float-1 8s ease-in-out infinite;
+  animation-delay: 2s;
+  filter: saturate(2.2) hue-rotate(-15deg);
+}
+
+.chem-water {
+  top: 50%;
+  right: 8%;
+  font-size: 2.8rem;
+  animation: chem-float-2 7s ease-in-out infinite;
+  animation-delay: 1s;
+  filter: saturate(3) hue-rotate(20deg);
+}
+
+// Contact section chemistry objects
+.chem-atom-2 {
+  top: 12%;
+  left: 6%;
+  font-size: 3.5rem;
+  animation: chem-float-1 10s ease-in-out infinite;
+  filter: saturate(2.5) hue-rotate(45deg);
+}
+
+.chem-dna {
+  bottom: 10%;
+  right: 5%;
+  font-size: 3.2rem;
+  animation: chem-float-3 8s ease-in-out infinite;
+  animation-delay: 1.5s;
+  filter: saturate(2.5) hue-rotate(-25deg);
+}
+
+.chem-scope {
+  top: 40%;
+  left: 3%;
+  font-size: 3rem;
+  animation: chem-float-2 9s ease-in-out infinite;
+  animation-delay: 2.5s;
+  filter: saturate(2.2) hue-rotate(35deg);
+}
+
+/* Chemistry float animations */
+@keyframes chem-float-1 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-18px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-22px) rotate(4deg);
+  }
+}
+
+@keyframes chem-float-2 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) translateX(10px) rotate(-6deg);
+  }
+  66% {
+    transform: translateY(-25px) translateX(-5px) rotate(4deg);
+  }
+}
+
+@keyframes chem-float-3 {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-12px) scale(1.08);
+  }
+  60% {
+    transform: translateY(-20px) scale(0.95);
+  }
+  80% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}

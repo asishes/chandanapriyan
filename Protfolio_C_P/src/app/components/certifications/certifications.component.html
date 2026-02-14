@@ -1,0 +1,35 @@
+<section id="certifications" class="certifications">
+  <div class="certifications-container">
+    <!-- Section Header -->
+    <div class="section-header animate-float-up">
+      <span class="section-number">05</span>
+      <h2 class="section-title">Certifications</h2>
+      <p class="section-subtitle">Professional Credentials & Qualifications</p>
+    </div>
+
+    <!-- Certifications Grid -->
+    <div class="certifications-grid">
+      <div *ngFor="let cert of certifications; let i = index" 
+           class="cert-card animate-stagger-{{ i + 1 }}"
+           [style.animation-delay]="(i * 100) + 'ms'">
+        
+        <!-- Certificate Icon -->
+        <div class="cert-icon">📜</div>
+
+        <!-- Certificate Content -->
+        <div class="cert-content">
+          <h3 class="cert-title">{{ cert.title }}</h3>
+          <p class="cert-issuer">
+            <span class="issuer-icon">🏛️</span>
+            {{ cert.issuer }}
+          </p>
+          <p *ngIf="cert.description" class="cert-description">{{ cert.description }}</p>
+          <span class="cert-year">{{ cert.year }}</span>
+        </div>
+
+        <!-- Verification Badge -->
+        <div class="cert-badge">✓</div>
+      </div>
+    </div>
+  </div>
+</section>

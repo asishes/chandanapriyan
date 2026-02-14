@@ -1,0 +1,89 @@
+<section id="about" class="about">
+  <!-- Chemistry Decorations -->
+  <div class="chem-deco" aria-hidden="true">
+    <div class="chem-obj chem-beaker">🧪</div>
+    <div class="chem-obj chem-atom">⚛️</div>
+    <div class="chem-obj chem-flask">⚗️</div>
+    <div class="chem-obj chem-molecule">🧬</div>
+  </div>
+
+  <div class="about-container">
+    <!-- Section Header -->
+    <div class="section-header animate-float-up">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Professional Summary</h2>
+      <p class="section-subtitle">Laboratory Analysis & Research</p>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="about-grid">
+      <!-- Left Column - Description -->
+      <div class="about-content animate-slide-in-left" style="animation-delay: 200ms">
+        <div class="content-wrapper">
+          <h3>Who Am I?</h3>
+          <p>
+            I'm a dedicated Chemist with expertise in water quality analysis, physicochemical testing, and laboratory documentation.
+            With professional experience in food and drinking water testing, I specialize in FSSAI compliance, IS 10500 standards,
+            and rigorous analytical methodologies.
+          </p>
+
+          <h3>Core Expertise</h3>
+          <p>
+            My laboratory work follows stringent protocols and industry best practices:
+          </p>
+          <ul class="approach-list">
+            <li>
+              <span class="check">✓</span>
+              <span>Water Quality Analysis (IS 10500)</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <span>FSSAI Method Implementation</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <span>Physicochemical Testing</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <span>GLP Documentation & Compliance</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <span>Instrumentation & Calibration</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <span>Quality Assurance Protocols</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column - Highlights -->
+      <div class="about-highlights animate-slide-in-right" style="animation-delay: 300ms">
+        <div class="highlights-grid">
+          <div *ngFor="let highlight of highlights; let i = index" 
+               class="highlight-card animate-stagger-{{ i + 1 }}"
+               [style.animation-delay]="(i * 100) + 'ms'">
+            <div class="highlight-icon">
+              {{ getIcon(highlight.icon) }}
+            </div>
+            <div class="highlight-content">
+              <p class="highlight-value">{{ highlight.value }}</p>
+              <p class="highlight-label">{{ highlight.label }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Keywords Card -->
+        <div class="keywords-card animate-scale-in" style="animation-delay: 400ms">
+          <h4>Key Expertise Areas</h4>
+          <div class="keywords-list">
+            <span *ngFor="let keyword of keywords" class="keyword">{{ keyword }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

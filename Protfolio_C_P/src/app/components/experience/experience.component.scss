@@ -1,0 +1,377 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/animations';
+
+.experience {
+  position: relative;
+  @include section;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 50%, #EFF6FF 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.3), transparent);
+  }
+}
+
+.experience-container {
+  @include container;
+}
+
+/* ==================== SECTION HEADER ==================== */
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  margin-bottom: $space-4xl;
+  text-align: center;
+
+  @include md {
+    margin-bottom: $space-3xl;
+  }
+}
+
+.section-number {
+  @include heading($font-size-xl, $font-weight-bold);
+  @include text-gradient;
+  font-size: $font-size-sm;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}
+
+.section-title {
+  @include heading($font-size-5xl, $font-weight-bold);
+  margin: 0;
+
+  @include lg {
+    @include heading($font-size-4xl, $font-weight-bold);
+  }
+
+  @include md {
+    @include heading($font-size-3xl, $font-weight-bold);
+  }
+}
+
+.section-subtitle {
+  @include body-text($font-size-lg, $font-weight-normal, $color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+
+  @include md {
+    @include body-text($font-size-base, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+/* ==================== TIMELINE ==================== */
+
+.timeline {
+  position: relative;
+  padding: $space-2xl 0;
+
+  @include lg {
+    padding: $space-lg 0;
+  }
+
+  @include md {
+    padding: 0;
+  }
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: $space-2xl;
+  margin-bottom: $space-3xl;
+  position: relative;
+
+  @include lg {
+    grid-template-columns: 60px 1fr;
+    gap: $space-lg;
+    margin-bottom: $space-2xl;
+  }
+
+  @include md {
+    grid-template-columns: 50px 1fr;
+    gap: $space-md;
+    margin-bottom: $space-xl;
+  }
+
+  @include sm {
+    grid-template-columns: 40px 1fr;
+    gap: $space-sm;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* ==================== TIMELINE NODE ==================== */
+
+.timeline-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.node-dot {
+  width: 20px;
+  height: 20px;
+  background: $color-card-bg;
+  border: 3px solid $color-accent-mocha;
+  border-radius: 50%;
+  position: relative;
+  z-index: 5;
+  @include transition-all;
+
+  @include lg {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  @include md {
+    width: 14px;
+    height: 14px;
+  }
+
+  &.active {
+    background: $color-accent-mocha;
+    box-shadow: $shadow-glow;
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+}
+
+.node-line {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 2px;
+  height: calc(100% + #{$space-3xl});
+  background: linear-gradient(180deg, rgba(0, 212, 170, 0.5) 0%, rgba(0, 212, 170, 0.1) 100%);
+  transform: translateX(-50%);
+
+  @include lg {
+    top: 16px;
+    height: calc(100% + #{$space-2xl});
+    width: 2px;
+  }
+
+  @include md {
+    top: 14px;
+  }
+}
+
+/* ==================== TIMELINE CONTENT ==================== */
+
+.timeline-content {
+  @include glassmorphism(0.05);
+  padding: $space-2xl;
+  border-radius: $radius-xl;
+  position: relative;
+  overflow: hidden;
+  @include smooth-shadow;
+
+  @include lg {
+    padding: $space-lg;
+  }
+
+  @include md {
+    padding: $space-md;
+  }
+
+  &:hover {
+    border-color: rgba(167, 120, 94, 0.5);
+
+    .exp-position {
+      color: $color-accent-mocha;
+    }
+  }
+}
+
+.active-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: $space-xs $space-md;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: $radius-lg;
+  font-size: $font-size-xs;
+  color: #22c55e;
+  margin-bottom: $space-md;
+  font-weight: $font-weight-semibold;
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+/* ==================== EXPERIENCE HEADER ==================== */
+
+.exp-header {
+  margin-bottom: $space-md;
+}
+
+.exp-position {
+  @include heading($font-size-xl, $font-weight-bold);
+  margin: 0 0 $space-xs 0;
+  @include transition-all;
+
+  @include md {
+    @include heading($font-size-lg, $font-weight-bold);
+  }
+
+  @include sm {
+    @include heading($font-size-base, $font-weight-bold);
+  }
+}
+
+.exp-company {
+  @include body-text($font-size-sm, $font-weight-medium, $color-accent-mocha);
+  margin: 0;
+
+  @include sm {
+    @include body-text($font-size-xs, $font-weight-medium, $color-accent-mocha);
+  }
+}
+
+.exp-duration {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+  @include body-text($font-size-sm, $font-weight-normal, $color-text-muted);
+
+  @include sm {
+    @include body-text($font-size-xs, $font-weight-normal, $color-text-muted);
+    margin-bottom: $space-md;
+  }
+
+  .duration-icon {
+    font-size: $font-size-lg;
+  }
+}
+
+/* ==================== EXPERIENCE LIST ==================== */
+
+.exp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+
+  @include sm {
+    gap: $space-sm;
+  }
+}
+
+.exp-item {
+  display: flex;
+  gap: $space-md;
+  @include body-text($font-size-sm, $font-weight-normal, $color-text-secondary);
+  margin: 0;
+  align-items: flex-start;
+
+  @include sm {
+    @include body-text($font-size-xs, $font-weight-normal, $color-text-secondary);
+    gap: $space-sm;
+  }
+}
+
+.exp-icon {
+  flex-shrink: 0;
+  color: $color-accent-mocha;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-base;
+  line-height: 1.5;
+}
+
+/* ==================== CARD DECORATION ==================== */
+
+.card-decoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0, 212, 170, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+
+  @include md {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* ==================== LIGHT MODE ==================== */
+
+body.light-mode {
+  .exp-position {
+    color: #1a202c;
+
+    &:hover {
+      color: #667eea;
+    }
+  }
+
+  .exp-company {
+    color: #667eea;
+  }
+
+  .exp-duration,
+  .exp-item {
+    color: #4a5568;
+  }
+
+  .exp-icon {
+    color: #667eea;
+  }
+
+  .timeline-content {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(102, 126, 234, 0.2);
+
+    &:hover {
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+  }
+
+  .node-dot {
+    background: #fff;
+    border-color: #667eea;
+
+    &.active {
+      background: #667eea;
+    }
+  }
+
+  .node-line {
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.3) 0%, rgba(102, 126, 234, 0.05) 100%);
+  }
+
+  .active-badge {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #16a34a;
+  }
+}

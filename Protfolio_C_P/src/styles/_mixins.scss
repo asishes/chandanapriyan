@@ -1,0 +1,320 @@
+@import './variables';
+
+// RESPONSIVE DESIGN MIXINS
+@mixin respond-to($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+// FLEXBOX MIXINS
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// GRID MIXINS
+@mixin grid($columns: auto, $gap: 0) {
+  display: grid;
+  grid-template-columns: $columns;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+@mixin grid-responsive($cols-lg: 3, $cols-md: 2, $cols-sm: 1, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat($cols-lg, 1fr);
+  gap: $gap;
+
+  @include md {
+    grid-template-columns: repeat($cols-md, 1fr);
+  }
+
+  @include sm {
+    grid-template-columns: repeat($cols-sm, 1fr);
+  }
+}
+
+// TYPOGRAPHY MIXINS
+@mixin heading($size: 2rem, $weight: 700, $line-height: 1.25) {
+  font-family: $font-family-accent;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin body-text($size: 1rem, $weight: 400, $color: $color-text-primary) {
+  font-family: $font-family-primary;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing-normal;
+}
+
+@mixin text-gradient($gradient: $gradient-accent) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// PSEUDO-ELEMENTS
+@mixin before($content: '', $position: absolute) {
+  &::before {
+    content: $content;
+    position: $position;
+    @content;
+  }
+}
+
+@mixin after($content: '', $position: absolute) {
+  &::after {
+    content: $content;
+    position: $position;
+    @content;
+  }
+}
+
+// POSITIONING
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absolute-full {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+// EFFECTS
+@mixin glassmorphism($opacity: 0.08) {
+  background: rgba(255, 255, 255, $opacity + 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+@mixin glow($color: $color-accent-mocha, $blur: 20px) {
+  box-shadow: 0 0 $blur rgba($color, 0.5);
+}
+
+@mixin smooth-shadow {
+  box-shadow: $shadow-md;
+  transition: box-shadow $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// TRANSITIONS
+@mixin transition($property: all, $duration: $transition-base, $timing: ease-in-out, $delay: 0s) {
+  transition: $property $duration $timing $delay;
+}
+
+@mixin transition-all($duration: $transition-base) {
+  transition: all $duration ease-in-out;
+}
+
+// TEXT CLIP
+@mixin ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// SCROLL BEHAVIOR
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-accent-mocha;
+    border-radius: $radius-lg;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+@mixin light-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #00D4AA;
+    border-radius: $radius-lg;
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+// BUTTON STYLES
+@mixin btn-base {
+  padding: $space-md $space-xl;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  border: none;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  @include transition-all;
+  letter-spacing: 0.05em;
+}
+
+@mixin btn-primary {
+  @include btn-base;
+  background: $gradient-primary;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3), 0 0 20px rgba(37, 99, 235, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.4), 0 0 30px rgba(37, 99, 235, 0.2);
+    transform: translateY(-4px);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+@mixin btn-secondary {
+  @include btn-base;
+  background: transparent;
+  color: $color-accent-mocha;
+  border: 2px solid rgba(37, 99, 235, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  position: relative;
+  transition: all 300ms ease-in-out;
+
+  &:hover {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: $color-accent-mocha;
+    color: $color-accent-mocha;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2), 0 0 20px rgba(37, 99, 235, 0.1);
+  }
+}
+
+// CONTAINER
+@mixin container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 $space-xl;
+
+  @include lg {
+    padding: 0 $space-lg;
+  }
+
+  @include md {
+    padding: 0 $space-md;
+  }
+
+  @include sm {
+    padding: 0 $space-sm;
+  }
+}
+
+// SECTION
+@mixin section($padding-y: $space-4xl) {
+  padding: $padding-y $space-xl;
+
+  @include lg {
+    padding: $padding-y * 0.75 $space-lg;
+  }
+
+  @include md {
+    padding: $padding-y * 0.5 $space-md;
+  }
+}

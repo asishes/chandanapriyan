@@ -1,0 +1,64 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <div class="navbar-logo">
+      <a href="#home" (click)="scrollToSection('#home')" class="logo-link">
+        <span class="logo-text">CHANDANA</span>
+        <span class="logo-accent">⚗</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Links -->
+    <div class="nav-links desktop">
+      <button
+        *ngFor="let link of navLinks"
+        (click)="scrollToSection(link.href)"
+        class="nav-link"
+      >
+        {{ link.label }}
+      </button>
+    </div>
+
+    <!-- Theme Toggle & Mobile Menu Button -->
+    <div class="navbar-actions">
+      <!-- Social Links -->
+      <div class="social-links">
+        <a *ngFor="let social of socialLinks" 
+           [href]="social.url" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="social-link"
+           [title]="social.label">
+          <span class="social-icon">{{ social.label === 'LinkedIn' ? 'in' : (social.label === 'GitHub' ? '◉' : '✉') }}</span>
+        </a>
+      </div>
+
+      <button
+        class="mobile-menu-toggle"
+        (click)="toggleMobileMenu()"
+        [class.active]="isMobileMenuOpen"
+        title="Toggle mobile menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-menu" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()">
+    <div class="mobile-nav-links" (click)="$event.stopPropagation()">
+      <button
+        *ngFor="let link of navLinks"
+        (click)="scrollToSection(link.href)"
+        class="mobile-nav-link"
+      >
+        {{ link.label }}
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Scroll Progress Indicator -->
+<div class="scroll-progress"></div>

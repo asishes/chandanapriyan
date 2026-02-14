@@ -1,0 +1,524 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/animations';
+
+.contact {
+  position: relative;
+  overflow: hidden;
+  @include section;
+  background: linear-gradient(135deg, #EEF2FF 0%, #F8FAFC 50%, #EFF6FF 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.3), transparent);
+  }
+}
+
+.contact-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+
+  &.gradient-orb-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -50px;
+    background: linear-gradient(135deg, #A7785E, #8B6F47);
+  }
+
+  &.gradient-orb-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -50px;
+    background: linear-gradient(135deg, #4A7C59, #A7785E);
+  }
+}
+
+.contact-container {
+  position: relative;
+  z-index: 2;
+  @include container;
+}
+
+/* ==================== SECTION HEADER ==================== */
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  margin-bottom: $space-4xl;
+  text-align: center;
+
+  @include md {
+    margin-bottom: $space-3xl;
+  }
+}
+
+.section-number {
+  @include heading($font-size-xl, $font-weight-bold);
+  @include text-gradient;
+  font-size: $font-size-sm;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}
+
+.section-title {
+  @include heading($font-size-5xl, $font-weight-bold);
+  margin: 0;
+
+  @include lg {
+    @include heading($font-size-4xl, $font-weight-bold);
+  }
+
+  @include md {
+    @include heading($font-size-3xl, $font-weight-bold);
+  }
+}
+
+.section-subtitle {
+  @include body-text($font-size-lg, $font-weight-normal, $color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+
+  @include md {
+    @include body-text($font-size-base, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+/* ==================== GRID LAYOUT ==================== */
+
+.contact-grid {
+  @include grid(repeat(2, 1fr), $space-3xl);
+
+  @include lg {
+    @include grid(repeat(1, 1fr), $space-2xl);
+  }
+
+  @include md {
+    gap: $space-xl;
+  }
+}
+
+/* ==================== CONTACT INFO SECTION ==================== */
+
+.contact-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+}
+
+.info-heading {
+  @include heading($font-size-2xl, $font-weight-semibold);
+  margin: 0;
+
+  @include md {
+    @include heading($font-size-xl, $font-weight-semibold);
+  }
+}
+
+.info-subtitle {
+  @include body-text($font-size-base, $font-weight-normal, $color-text-secondary);
+  margin: 0;
+
+  @include md {
+    @include body-text($font-size-sm, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+/* ==================== CONTACT ITEMS ==================== */
+
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  @include md {
+    gap: $space-md;
+  }
+}
+
+.contact-item {
+  animation: float-up 0.6s ease-out;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  padding: $space-lg;
+  @include glassmorphism(0.05);
+  border-radius: $radius-xl;
+  text-decoration: none;
+  color: inherit;
+  @include transition-all;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  @include md {
+    padding: $space-md;
+    gap: $space-md;
+  }
+
+  &:hover {
+    background: $color-card-bg-hover;
+    transform: translateX(8px);
+    border-color: rgba(0, 212, 170, 0.5);
+
+    .contact-arrow {
+      transform: translateX(4px);
+    }
+
+    .contact-icon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.contact-icon {
+  font-size: $font-size-2xl;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 212, 170, 0.1);
+  border-radius: $radius-lg;
+  transition: all $transition-base;
+
+  @include md {
+    font-size: $font-size-xl;
+    width: 45px;
+    height: 45px;
+  }
+
+  @include sm {
+    width: 40px;
+    height: 40px;
+    font-size: $font-size-lg;
+  }
+}
+
+.contact-text {
+  flex: 1;
+}
+
+.contact-label {
+  @include body-text($font-size-sm, $font-weight-medium, $color-text-muted);
+  margin: 0 0 $space-xs 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}
+
+.contact-value {
+  @include heading($font-size-base, $font-weight-semibold);
+  margin: 0;
+  color: $color-text-primary;
+
+  @include sm {
+    @include heading($font-size-sm, $font-weight-semibold);
+  }
+}
+
+.contact-arrow {
+  font-size: $font-size-lg;
+  transition: transform $transition-base;
+  opacity: 0.6;
+}
+
+/* ==================== SOCIAL LINKS ==================== */
+
+.social-links {
+  padding-top: $space-2xl;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  @include md {
+    padding-top: $space-lg;
+  }
+}
+
+.social-heading {
+  @include heading($font-size-lg, $font-weight-semibold);
+  margin: 0 0 $space-lg 0;
+
+  @include sm {
+    @include heading($font-size-base, $font-weight-semibold);
+    margin-bottom: $space-md;
+  }
+}
+
+.social-items {
+  display: flex;
+  gap: $space-md;
+}
+
+.social-link {
+  width: 45px;
+  height: 45px;
+  @include flex-center;
+  @include glassmorphism(0.05);
+  border-radius: $radius-lg;
+  color: $color-text-secondary;
+  text-decoration: none;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-sm;
+  @include transition-all;
+
+  @include sm {
+    width: 40px;
+    height: 40px;
+  }
+
+  &:hover {
+    background: $color-card-bg-hover;
+    color: $color-accent-mocha;
+    transform: translateY(-4px);
+    box-shadow: $shadow-glow;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ==================== CONTACT FORM SECTION ==================== */
+
+.contact-form-section {
+  position: relative;
+}
+
+.form-wrapper {
+  position: relative;
+}
+
+.success-message {
+  @include glassmorphism(0.1);
+  padding: $space-2xl;
+  border-radius: $radius-xl;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  text-align: center;
+  flex-direction: column;
+  background: rgba(34, 197, 94, 0.05);
+
+  .success-icon {
+    font-size: $font-size-4xl;
+    color: #22c55e;
+    animation: float-up 0.6s ease-out;
+  }
+
+  p {
+    @include body-text($font-size-base, $font-weight-normal, $color-text-primary);
+    margin: 0;
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  &.hidden {
+    display: none;
+  }
+
+  @include md {
+    gap: $space-md;
+  }
+}
+
+/* ==================== FORM GROUPS ==================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.form-label {
+  @include body-text($font-size-sm, $font-weight-semibold);
+  margin: 0;
+
+  @include sm {
+    @include body-text($font-size-xs, $font-weight-semibold);
+  }
+}
+
+.form-input {
+  padding: $space-md;
+  background: $color-card-bg;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-lg;
+  color: $color-text-primary;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  @include transition-all;
+
+  @include sm {
+    font-size: $font-size-sm;
+    padding: $space-sm;
+  }
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: $color-accent-mocha;
+    box-shadow: 0 0 12px rgba(167, 120, 94, 0.2);
+  }
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 150px;
+  font-family: $font-family-primary;
+
+  @include sm {
+    min-height: 120px;
+  }
+}
+
+/* ==================== SUBMIT BUTTON ==================== */
+
+.submit-btn {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-md;
+  @include btn-primary;
+
+  @include sm {
+    width: 100%;
+  }
+
+  &.loading {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.loading-text {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: $color-text-primary;
+  border-radius: 50%;
+  animation: rotate 0.8s linear infinite;
+
+  @keyframes rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* ==================== LIGHT MODE ==================== */
+
+body.light-mode {
+  .info-heading {
+    color: #1a202c;
+  }
+
+  .info-subtitle,
+  .contact-label {
+    color: #4a5568;
+  }
+
+  .contact-link {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(102, 126, 234, 0.2);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+
+    .contact-icon {
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .contact-value {
+      color: #1a202c;
+    }
+  }
+
+  .social-heading {
+    color: #1a202c;
+  }
+
+  .social-link {
+    background: rgba(255, 255, 255, 0.5);
+    color: #4a5568;
+    border-color: rgba(102, 126, 234, 0.2);
+
+    &:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+    }
+  }
+
+  .form-label {
+    color: #1a202c;
+  }
+
+  .form-input {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #1a202c;
+
+    &::placeholder {
+      color: #a0aec0;
+    }
+
+    &:focus {
+      border-color: #667eea;
+      background: rgba(0, 0, 0, 0.08);
+    }
+  }
+}

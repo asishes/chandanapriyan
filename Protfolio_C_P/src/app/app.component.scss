@@ -1,0 +1,13 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+@import '../styles/animations';
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+main {
+  width: 100%;
+}

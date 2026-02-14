@@ -1,0 +1,634 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/animations';
+
+.hero {
+  position: relative;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  @include section($space-4xl);
+  padding-top: 120px;
+}
+
+/* ==================== BACKGROUND ==================== */
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.animated-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $gradient-hero;
+  background-size: 400% 400%;
+  animation: bg-shift 15s ease infinite;
+}
+
+.animated-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: float 20s ease-in-out infinite;
+
+  @include md {
+    background-size: 30px 30px;
+  }
+}
+
+/* ==================== FLOATING CHEMISTRY ICONS ==================== */
+
+.floating-icons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.icon {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.4;
+  filter: saturate(2.2) brightness(1.2);
+
+  &.icon-1 {
+    top: 12%;
+    right: 12%;
+    font-size: 36px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  &.icon-2 {
+    top: 25%;
+    left: 6%;
+    font-size: 30px;
+    animation: float 5s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  &.icon-3 {
+    bottom: 22%;
+    right: 18%;
+    font-size: 32px;
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  &.icon-4 {
+    bottom: 18%;
+    left: 12%;
+    animation: float 4.5s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  &.icon-5 {
+    top: 55%;
+    right: 6%;
+    font-size: 24px;
+    animation: float 5.5s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+
+  &.icon-6 {
+    top: 8%;
+    left: 30%;
+    font-size: 22px;
+    animation: float 7s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+
+  @include sm {
+    font-size: 20px;
+    opacity: 0.1;
+
+    &.icon-5, &.icon-6 {
+      display: none;
+    }
+  }
+}
+
+/* ==================== MOLECULE RING DECORATION ==================== */
+
+.molecule-ring {
+  position: absolute;
+  top: 50%;
+  right: -5%;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 1;
+
+  @include lg {
+    width: 300px;
+    height: 300px;
+    right: -8%;
+  }
+
+  @include md {
+    display: none;
+  }
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid;
+
+  &.ring-1 {
+    width: 100%;
+    height: 100%;
+    border-color: rgba(59, 130, 246, 0.08);
+    animation: spin-slow 25s linear infinite;
+  }
+
+  &.ring-2 {
+    width: 70%;
+    height: 70%;
+    border-color: rgba(34, 211, 238, 0.1);
+    animation: spin-slow 18s linear infinite reverse;
+  }
+
+  &.ring-3 {
+    width: 40%;
+    height: 40%;
+    border-color: rgba(139, 92, 246, 0.12);
+    animation: spin-slow 12s linear infinite;
+  }
+}
+
+@keyframes spin-slow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ==================== CONTAINER & CONTENT ==================== */
+
+.hero-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  @include container;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  gap: $space-2xl;
+  will-change: transform;
+}
+
+/* ==================== HERO BADGE ==================== */
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-xl;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(34, 211, 238, 0.1));
+  border: 1.5px solid rgba(59, 130, 246, 0.4);
+  border-radius: $radius-2xl;
+  font-size: $font-size-sm;
+  color: $color-accent-mocha;
+  backdrop-filter: blur(12px);
+  width: fit-content;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  animation: float-up 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(34, 211, 238, 0.2));
+    border-color: rgba(34, 211, 238, 0.6);
+    box-shadow: 
+      0 0 20px rgba(59, 130, 246, 0.3),
+      inset 0 0 20px rgba(34, 211, 238, 0.1);
+    transform: translateY(-3px) scale(1.05);
+
+    &::before {
+      left: 100%;
+    }
+  }
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background: $color-accent-mocha;
+  border-radius: 50%;
+  animation: pulse-smooth 2s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+}
+
+/* ==================== GREETING ==================== */
+
+.hero-greeting {
+  @include heading($font-size-2xl, $font-weight-medium);
+  color: $color-accent-mocha;
+  margin: 0 0 $space-sm 0;
+  letter-spacing: 0.5px;
+
+  @include md {
+    @include heading($font-size-xl, $font-weight-medium);
+  }
+
+  @include sm {
+    @include heading($font-size-lg, $font-weight-medium);
+  }
+}
+
+/* ==================== TITLE ==================== */
+
+.hero-title {
+  @include heading($font-size-6xl, $font-weight-extrabold);
+  background: linear-gradient(135deg, #1E293B 0%, #334155 30%, #2563EB 60%, #3B82F6 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  max-width: 100%;
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+  margin-bottom: $space-lg;
+  animation: title-shimmer 4s ease-in-out infinite alternate;
+
+  @include lg {
+    @include heading($font-size-5xl, $font-weight-extrabold);
+    letter-spacing: -2px;
+  }
+
+  @include md {
+    @include heading($font-size-4xl, $font-weight-extrabold);
+    letter-spacing: -1.5px;
+  }
+
+  @include sm {
+    @include heading($font-size-3xl, $font-weight-extrabold);
+    letter-spacing: -0.5px;
+  }
+}
+
+/* ==================== SUBTITLE ==================== */
+
+.hero-subtitle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  max-width: 800px;
+  animation: float-up 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  transition: all 0.4s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.hero-subtitle {
+  @include heading($font-size-3xl, $font-weight-bold);
+  background: linear-gradient(135deg, #2563EB, #3B82F6, #60A5FA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: color-shift 4s ease-in-out infinite;
+
+  @include md {
+    @include heading($font-size-2xl, $font-weight-bold);
+  }
+
+  @include sm {
+    @include heading($font-size-xl, $font-weight-bold);
+  }
+}
+
+.subtitle-gradient {
+  display: inline-block;
+}
+
+.hero-description {
+  @include body-text($font-size-lg, $font-weight-normal, $color-text-secondary);
+  max-width: 600px;
+
+  @include lg {
+    @include body-text($font-size-base, $font-weight-normal, $color-text-secondary);
+  }
+
+  @include sm {
+    @include body-text($font-size-sm, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+/* ==================== STATS ==================== */
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $space-2xl;
+  padding: $space-xl 0;
+  width: 100%;
+  flex-wrap: wrap;
+  animation: float-up 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+
+  @include md {
+    gap: $space-lg;
+    padding: $space-lg 0;
+  }
+
+  @include sm {
+    gap: $space-md;
+    padding: $space-md 0;
+  }
+}
+
+.stat {
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  padding: $space-md;
+  border-radius: $radius-lg;
+
+  &:hover {
+    transform: translateY(-8px);
+
+    .stat-value {
+      filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.6));
+    }
+  }
+
+  &.divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    padding: 0;
+    border-radius: 0;
+
+    @include sm {
+      display: none;
+    }
+  }
+}
+
+.stat-value {
+  @include heading($font-size-2xl, $font-weight-extrabold);
+  @include text-gradient;
+  margin: 0;
+  transition: all 0.4s ease;
+
+  @include md {
+    @include heading($font-size-xl, $font-weight-extrabold);
+  }
+
+  @include sm {
+    @include heading($font-size-lg, $font-weight-extrabold);
+  }
+}
+
+.stat-label {
+  @include body-text($font-size-sm, $font-weight-medium, $color-text-muted);
+  margin: $space-xs 0 0 0;
+  transition: color 0.3s ease;
+
+  @include sm {
+    font-size: $font-size-xs;
+  }
+}
+
+/* ==================== BUTTONS ==================== */
+
+.hero-buttons {
+  display: flex;
+  gap: $space-lg;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-top: $space-2xl;
+
+  @include sm {
+    flex-direction: column;
+    width: 100%;
+    gap: $space-md;
+  }
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: float-up 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+
+    .arrow {
+      transform: translateX(6px);
+    }
+  }
+
+  &.btn-primary {
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
+    border: 2px solid rgba(59, 130, 246, 0.5);
+    box-shadow: 
+      0 10px 30px rgba(59, 130, 246, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      box-shadow: 
+        0 20px 50px rgba(59, 130, 246, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &.btn-secondary {
+    background: rgba(59, 130, 246, 0.1);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    color: $color-accent-mocha;
+
+    &:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(34, 211, 238, 0.5);
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2);
+    }
+
+    @include sm {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  &.btn-linkedin {
+    background: linear-gradient(135deg, #0A66C2, #0052B4);
+    border: 2px solid rgba(10, 102, 194, 0.5);
+    color: #fff;
+    box-shadow: 
+      0 10px 30px rgba(10, 102, 194, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: linear-gradient(135deg, #0052B4, #003d82);
+      box-shadow: 
+        0 20px 50px rgba(10, 102, 194, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    @include sm {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @include sm {
+    padding: $space-md $space-lg;
+    font-size: $font-size-sm;
+  }
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform $transition-base;
+}
+
+/* ==================== SCROLL INDICATOR ==================== */
+
+.scroll-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-xl;
+  color: $color-accent-mocha;
+  opacity: 0.6;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+/* ==================== PARTICLES ==================== */
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+  animation: particle-glow 2s ease-in-out infinite;
+
+  &.particle-1 {
+    width: 6px;
+    height: 6px;
+    background: rgba(59, 130, 246, 0.9);
+    box-shadow: 
+      0 0 10px rgba(59, 130, 246, 0.8),
+      0 0 20px rgba(59, 130, 246, 0.5),
+      inset 0 0 8px rgba(99, 102, 241, 0.6);
+    animation: particle-float-1 ease-out forwards, particle-glow 2s ease-in-out infinite;
+  }
+
+  &.particle-2 {
+    width: 4px;
+    height: 4px;
+    background: rgba(34, 211, 238, 0.85);
+    box-shadow: 
+      0 0 12px rgba(34, 211, 238, 0.8),
+      0 0 25px rgba(34, 211, 238, 0.5),
+      inset 0 0 8px rgba(34, 211, 238, 0.6);
+    animation: particle-float-2 ease-out forwards, particle-glow 2s ease-in-out infinite;
+  }
+
+  &.particle-3 {
+    width: 5px;
+    height: 5px;
+    background: rgba(59, 130, 246, 0.8);
+    box-shadow: 
+      0 0 15px rgba(59, 130, 246, 0.7),
+      0 0 30px rgba(59, 130, 246, 0.4),
+      inset 0 0 8px rgba(59, 130, 246, 0.5);
+    animation: particle-float-3 ease-out forwards, particle-glow 2s ease-in-out infinite;
+  }
+
+  &.particle-4 {
+    width: 7px;
+    height: 7px;
+    background: rgba(139, 92, 246, 0.8);
+    box-shadow: 
+      0 0 12px rgba(139, 92, 246, 0.7),
+      0 0 25px rgba(139, 92, 246, 0.4),
+      inset 0 0 8px rgba(139, 92, 246, 0.5);
+    animation: particle-float-4 ease-out forwards, particle-glow 2s ease-in-out infinite;
+  }
+}
+
+/* ==================== TITLE SHIMMER ==================== */
+
+@keyframes title-shimmer {
+  from { background-position: 0% center; }
+  to { background-position: 200% center; }
+}
+
+/* ==================== LIGHT MODE ==================== */

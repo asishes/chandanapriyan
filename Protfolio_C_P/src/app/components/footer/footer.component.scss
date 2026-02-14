@@ -1,0 +1,279 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/animations';
+
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, #F8FAFC 0%, #E0E7FF 100%);
+  border-top: 1px solid rgba(37, 99, 235, 0.1);
+  padding: $space-4xl $space-xl;
+
+  @include lg {
+    padding: $space-3xl $space-lg;
+  }
+
+  @include md {
+    padding: $space-2xl $space-md;
+  }
+}
+
+.footer-container {
+  position: relative;
+  @include container;
+}
+
+/* ==================== FOOTER CONTENT ==================== */
+
+.footer-content {
+  @include grid(repeat(3, 1fr), $space-3xl);
+  margin-bottom: $space-3xl;
+
+  @include lg {
+    @include grid(repeat(3, 1fr), $space-2xl);
+  }
+
+  @include md {
+    @include grid(repeat(1, 1fr), $space-2xl);
+    margin-bottom: $space-2xl;
+  }
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  animation: float-up 0.6s ease-out;
+
+  @include md {
+    text-align: left;
+  }
+}
+
+.footer-heading {
+  @include heading($font-size-lg, $font-weight-bold);
+  margin: 0;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @include md {
+    @include heading($font-size-base, $font-weight-bold);
+  }
+}
+
+.footer-text {
+  @include body-text($font-size-sm, $font-weight-normal, $color-text-secondary);
+  margin: 0;
+  line-height: $line-height-relaxed;
+
+  @include md {
+    @include body-text($font-size-xs, $font-weight-normal, $color-text-secondary);
+  }
+}
+
+.footer-subheading {
+  @include heading($font-size-sm, $font-weight-semibold);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  @include md {
+    @include heading($font-size-xs, $font-weight-semibold);
+  }
+}
+
+/* ==================== FOOTER LINKS ==================== */
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+
+  @include md {
+    gap: $space-sm;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    @include body-text($font-size-sm, $font-weight-normal, $color-text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: all $transition-base;
+    display: inline-block;
+
+    @include md {
+      @include body-text($font-size-xs, $font-weight-normal, $color-text-secondary);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: $color-accent-mocha;
+      transition: width $transition-base;
+    }
+
+    &:hover {
+      color: $color-accent-mocha;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* ==================== FOOTER DIVIDER ==================== */
+
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.3), transparent);
+  margin-bottom: $space-2xl;
+
+  @include md {
+    margin-bottom: $space-lg;
+  }
+}
+
+/* ==================== FOOTER BOTTOM ==================== */
+
+.footer-bottom {
+  @include flex-between;
+  gap: $space-lg;
+  flex-wrap: wrap;
+
+  @include sm {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.footer-copyright {
+  @include body-text($font-size-sm, $font-weight-normal, $color-text-muted);
+  margin: 0;
+
+  @include sm {
+    @include body-text($font-size-xs, $font-weight-normal, $color-text-muted);
+    order: 2;
+  }
+}
+
+.heart {
+  display: inline-block;
+  animation: pulse-heart 1.5s ease-in-out infinite;
+
+  @keyframes pulse-heart {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+}
+
+/* ==================== SCROLL TO TOP BUTTON ==================== */
+
+.scroll-to-top {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  background: $color-accent-mocha;
+  color: $color-text-primary;
+  border: none;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  @include transition-all;
+  flex-shrink: 0;
+
+  @include sm {
+    width: 36px;
+    height: 36px;
+    order: 1;
+  }
+
+  &:hover {
+    background: $color-accent-green;
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg, $shadow-glow;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+/* ==================== LIGHT MODE ==================== */
+
+body.light-mode {
+  .footer {
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.5) 100%);
+    border-top-color: rgba(102, 126, 234, 0.1);
+  }
+
+  .footer-divider {
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+  }
+
+  .footer-heading {
+    background: linear-gradient(135deg, #667eea, #5a67d8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-subheading {
+    color: #1a202c;
+  }
+
+  .footer-text,
+  .footer-copyright {
+    color: #4a5568;
+  }
+
+  .footer-links a {
+    color: #4a5568;
+
+    &:hover {
+      color: #667eea;
+    }
+  }
+
+  .scroll-to-top {
+    background: #667eea;
+    color: #ffffff;
+
+    &:hover {
+      background: #5a67d8;
+    }
+  }
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@for $i from 1 through 3 {
+  .footer-column:nth-child(#{$i}) {
+    animation-delay: #{$i * 100}ms;
+  }
+}

@@ -1,0 +1,179 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.certifications {
+  padding: $space-4xl 0;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 50%, #EFF6FF 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at 100% 0%,
+      rgba($color-accent-primary, 0.03) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+.certifications-container {
+  @include container;
+  position: relative;
+  z-index: 1;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $space-2xl;
+  margin-top: $space-4xl;
+
+  @include md {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $space-xl;
+    margin-top: $space-3xl;
+  }
+
+  @include sm {
+    grid-template-columns: 1fr;
+    gap: $space-lg;
+    margin-top: $space-2xl;
+  }
+}
+
+.cert-card {
+  position: relative;
+  padding: $space-2xl;
+  background: $color-card-bg;
+  border: 1px solid rgba($color-accent-primary, 0.15);
+  border-radius: $radius-lg;
+  backdrop-filter: blur(10px);
+  animation: float-up $transition-slow both;
+  transition: all $transition-base;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $color-accent-primary,
+      transparent
+    );
+    border-radius: $radius-lg $radius-lg 0 0;
+  }
+
+  &:hover {
+    background: $color-card-bg-hover;
+    border-color: rgba($color-accent-primary, 0.3);
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+
+    .cert-icon {
+      transform: scale(1.1) rotateY(10deg);
+    }
+
+    .cert-title {
+      color: $color-accent-primary;
+    }
+  }
+
+  @include md {
+    padding: $space-xl;
+  }
+
+  @include sm {
+    padding: $space-lg;
+  }
+}
+
+.cert-icon {
+  font-size: $font-size-4xl;
+  text-align: center;
+  transition: all $transition-base;
+}
+
+.cert-content {
+  flex: 1;
+}
+
+.cert-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0 0 $space-sm 0;
+  transition: all $transition-base;
+
+  @include sm {
+    font-size: $font-size-base;
+  }
+}
+
+.cert-issuer {
+  font-size: $font-size-sm;
+  color: $color-accent-primary;
+  margin: 0 0 $space-md 0;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+
+  .issuer-icon {
+    display: inline-block;
+  }
+}
+
+.cert-description {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0 0 $space-md 0;
+  line-height: $line-height-normal;
+}
+
+.cert-year {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  padding-top: $space-sm;
+  border-top: 1px solid rgba($color-accent-primary, 0.1);
+}
+
+.cert-badge {
+  position: absolute;
+  top: $space-lg;
+  right: $space-lg;
+  width: 32px;
+  height: 32px;
+  background: $color-accent-secondary;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+  box-shadow: 0 4px 12px rgba($color-accent-secondary, 0.3);
+
+  @include sm {
+    width: 28px;
+    height: 28px;
+    font-size: $font-size-base;
+    top: $space-md;
+    right: $space-md;
+  }
+}

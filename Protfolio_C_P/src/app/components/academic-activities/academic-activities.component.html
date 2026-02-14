@@ -1,0 +1,43 @@
+<section id="activities" class="academic-activities">
+  <div class="activities-container">
+    <!-- Section Header -->
+    <div class="section-header animate-float-up">
+      <span class="section-number">06</span>
+      <h2 class="section-title">Activities</h2>
+      <p class="section-subtitle">Conferences, Seminars & Professional Development</p>
+    </div>
+
+    <!-- Activities List -->
+    <div class="activities-list">
+      <div *ngFor="let activity of activities; let i = index" 
+           class="activity-card animate-stagger-{{ i + 1 }}"
+           [style.animation-delay]="(i * 100) + 'ms'">
+        
+        <!-- Activity Header -->
+        <div class="activity-header">
+          <div class="type-badge" [ngClass]="'type-' + activity.type.toLowerCase()">
+            {{ activity.type }}
+          </div>
+          <span class="activity-year">{{ activity.year }}</span>
+        </div>
+
+        <!-- Activity Title -->
+        <h3 class="activity-title">{{ activity.title }}</h3>
+
+        <!-- Organization -->
+        <p class="activity-organization">
+          <span class="org-icon">🏢</span>
+          {{ activity.organization }}
+        </p>
+
+        <!-- Details -->
+        <ul *ngIf="activity.details" class="activity-details">
+          <li *ngFor="let detail of activity.details" class="detail-item">
+            <span class="detail-icon">✦</span>
+            <span>{{ detail }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

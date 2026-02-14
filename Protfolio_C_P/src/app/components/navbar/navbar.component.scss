@@ -1,0 +1,320 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/animations';
+
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  transition: all $transition-base;
+  border-bottom: 1px solid transparent;
+
+  &.scrolled {
+    @include glassmorphism(0.08);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+    box-shadow: $shadow-md;
+  }
+
+  &:not(.scrolled) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+}
+
+.navbar-container {
+  @include flex-between;
+  height: 80px;
+  gap: $space-lg;
+  @include container;
+
+  @include md {
+    height: 70px;
+  }
+
+  @include sm {
+    height: 60px;
+  }
+}
+
+/* ==================== LOGO ==================== */
+
+.navbar-logo {
+  flex-shrink: 0;
+  animation: float-up 0.6s ease-out;
+}
+
+.logo-link {
+  @include flex-center;
+  gap: $space-xs;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    .logo-text {
+      @include text-gradient;
+    }
+  }
+}
+
+.logo-text {
+  @include heading($font-size-xl, $font-weight-bold);
+  background: linear-gradient(135deg, #1E293B, #475569);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all $transition-base;
+
+  @include sm {
+    @include heading($font-size-lg, $font-weight-bold);
+  }
+}
+
+.logo-accent {
+  @include text-gradient($gradient-primary);
+  @include heading($font-size-xl, $font-weight-extrabold);
+  animation: pulse 2s ease-in-out infinite;
+
+  @include sm {
+    @include heading($font-size-lg, $font-weight-extrabold);
+  }
+}
+
+/* ==================== DESKTOP NAVIGATION ==================== */
+
+.nav-links {
+  @include flex;
+  gap: $space-xl;
+  flex: 1;
+  justify-content: center;
+
+  @include lg {
+    display: none;
+  }
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  color: $color-text-secondary;
+  @include body-text($font-size-base, $font-weight-medium);
+  position: relative;
+  cursor: pointer;
+  transition: color $transition-base;
+  padding: $space-sm 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $gradient-primary;
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform $transition-base;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-text-primary;
+    outline: none;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* ==================== ACTIONS ==================== */
+
+.navbar-actions {
+  @include flex-center;
+  gap: $space-md;
+  flex-shrink: 0;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: $color-text-secondary;
+  cursor: pointer;
+  padding: $space-sm;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-base;
+
+  &:hover {
+    color: $color-accent-mocha;
+    background: rgba(167, 120, 94, 0.1);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ==================== SOCIAL LINKS ==================== */
+
+.social-links {
+  @include flex-center;
+  gap: $space-md;
+  padding-left: $space-md;
+  border-left: 1px solid rgba(37, 99, 235, 0.2);
+
+  @include md {
+    display: none;
+  }
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  background: rgba(37, 99, 235, 0.08);
+  color: $color-accent-mocha;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: $font-size-base;
+
+  &:hover {
+    background: linear-gradient(135deg, #2563EB, #3B82F6);
+    color: #fff;
+    border-color: rgba(37, 99, 235, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+  }
+
+  .social-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ==================== MOBILE MENU ==================== */
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: $color-text-primary;
+  cursor: pointer;
+  padding: $space-sm;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  z-index: 1001;
+
+  @include lg {
+    display: flex;
+  }
+
+  span {
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    transition: all $transition-base;
+  }
+
+  &.active {
+    span:first-child {
+      transform: rotate(45deg) translateY(11px);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:last-child {
+      transform: rotate(-45deg) translateY(-11px);
+    }
+  }
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all $transition-base;
+
+  @include lg {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.mobile-nav-links {
+  @include flex;
+  flex-direction: column;
+  gap: $space-lg;
+  padding: $space-2xl $space-lg;
+  animation: slide-in-down 0.4s ease-out;
+}
+
+.mobile-nav-link {
+  background: none;
+  border: none;
+  color: $color-text-primary;
+  @include heading($font-size-lg, $font-weight-medium);
+  cursor: pointer;
+  text-align: left;
+  transition: all $transition-base;
+  padding: $space-md 0;
+  border-left: 3px solid transparent;
+  padding-left: $space-md;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: $color-accent-mocha;
+    border-left-color: $color-accent-mocha;
+    transform: translateX(8px);
+  }
+}
+
+/* ==================== SCROLL PROGRESS INDICATOR ==================== */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: $gradient-primary;
+  width: 0%;
+  z-index: $z-navbar + 1;
+  transition: width $transition-base;
+  box-shadow: $shadow-glow;
+}
+
+/* ==================== LIGHT MODE ==================== */

@@ -1,0 +1,104 @@
+<section id="home" class="hero" aria-label="Hero section">
+  <!-- Animated Background -->
+  <div class="hero-background" aria-hidden="true">
+    <div class="animated-gradient"></div>
+    <div class="animated-grid"></div>
+    
+    <!-- Particle Effects -->
+    <div class="particles">
+      <div *ngFor="let particle of particles; trackBy: trackParticle" 
+           class="particle" 
+           [ngClass]="'particle-' + particle.type"
+           [style.left.%]="particle.x"
+           [style.bottom.%]="particle.y"
+           [style.animation-duration.s]="particle.duration"
+           [style.animation-delay.s]="particle.delay">
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Chemistry Icons -->
+  <div class="floating-icons" aria-hidden="true">
+    <div class="icon icon-1">⚗️</div>
+    <div class="icon icon-2">🧪</div>
+    <div class="icon icon-3">🔬</div>
+    <div class="icon icon-4">💧</div>
+    <div class="icon icon-5">⚛️</div>
+    <div class="icon icon-6">🧫</div>
+  </div>
+
+  <!-- Molecule Ring Decoration -->
+  <div class="molecule-ring" aria-hidden="true">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-container">
+    <div class="hero-content">
+      <!-- Animated Badge -->
+      <div class="hero-badge animate-float-up">
+        <span class="badge-dot"></span>
+        <span>Professional Chemist & Laboratory Analyst</span>
+      </div>
+
+      <!-- Main Heading -->
+      <p class="hero-greeting animate-float-up" style="animation-delay: 80ms">Hello, I'm</p>
+      <h1 class="hero-title animate-float-up" style="animation-delay: 100ms">
+        CHANDANA PRIYAN
+      </h1>
+
+      <!-- Subtitle with gradient -->
+      <div class="hero-subtitle-wrapper animate-float-up" style="animation-delay: 200ms">
+        <h2 class="hero-subtitle">
+          <span class="subtitle-gradient">Chemist</span>
+        </h2>
+        <p class="hero-description">
+          Specialized in Water Quality & Physicochemical Analysis
+        </p>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="hero-stats animate-float-up" style="animation-delay: 250ms">
+        <div class="stat">
+          <p class="stat-value">MSc</p>
+          <p class="stat-label">Chemistry</p>
+        </div>
+        <div class="stat divider"></div>
+        <div class="stat">
+          <p class="stat-value">1+</p>
+          <p class="stat-label">Years Experience</p>
+        </div>
+        <div class="stat divider"></div>
+        <div class="stat">
+          <p class="stat-value">500+</p>
+          <p class="stat-label">Tests Performed</p>
+        </div>
+        <div class="stat divider"></div>
+        <div class="stat">
+          <p class="stat-value">IS/FSSAI</p>
+          <p class="stat-label">Standards</p>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hero-buttons animate-float-up" style="animation-delay: 300ms">
+        <button class="btn btn-primary" (click)="scrollToSection('projects')">
+          View Research Projects
+          <span class="arrow">→</span>
+        </button>
+        <button class="btn btn-secondary" (click)="scrollToSection('contact')">
+          Get In Touch
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator animate-bounce" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 5v14m7-7l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </div>
+  </div>
+</section>

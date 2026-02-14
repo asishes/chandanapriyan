@@ -1,0 +1,206 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.education {
+  padding: $space-4xl 0;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 50%, #EFF6FF 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba($color-accent-primary, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba($color-accent-secondary, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+}
+
+.education-container {
+  @include container;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==================== HORIZONTAL TIMELINE ==================== */
+
+.timeline-horizontal {
+  position: relative;
+  margin-top: $space-3xl;
+  padding-top: $space-3xl;
+
+  @include md {
+    margin-top: $space-2xl;
+    padding-top: $space-2xl;
+  }
+}
+
+.h-timeline-line {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    $color-accent-primary,
+    rgba($color-accent-primary, 0.4),
+    transparent
+  );
+
+  @include md {
+    display: none;
+  }
+}
+
+.h-timeline-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-xl;
+
+  @include lg {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-lg;
+  }
+
+  @include sm {
+    grid-template-columns: 1fr;
+    gap: $space-lg;
+  }
+}
+
+.h-timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: float-up $transition-slow both;
+}
+
+/* ---- Marker ---- */
+
+.h-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  margin-bottom: $space-lg;
+  position: relative;
+  z-index: 2;
+
+  @include md {
+    margin-bottom: $space-md;
+  }
+}
+
+.h-marker-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 3px solid $color-accent-primary;
+  box-shadow: 0 0 0 4px rgba($color-accent-primary, 0.12);
+  transition: all $transition-base;
+}
+
+.h-marker.current .h-marker-dot {
+  width: 18px;
+  height: 18px;
+  background: $color-accent-primary;
+  box-shadow: 0 0 0 6px rgba($color-accent-primary, 0.2);
+}
+
+.h-period {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-accent-primary;
+  letter-spacing: $letter-spacing-wide;
+  white-space: nowrap;
+}
+
+/* ---- Card ---- */
+
+.h-card {
+  width: 100%;
+  padding: $space-lg;
+  background: $color-card-bg;
+  border: 1px solid rgba($color-accent-primary, 0.15);
+  border-radius: $radius-lg;
+  backdrop-filter: blur(10px);
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $color-accent-primary, transparent);
+  }
+
+  &:hover {
+    background: $color-card-bg-hover;
+    border-color: rgba($color-accent-primary, 0.3);
+    transform: translateY(-4px);
+    box-shadow: $shadow-md;
+  }
+
+  @include sm {
+    padding: $space-md;
+  }
+}
+
+.h-degree {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0 0 $space-sm 0;
+  line-height: $line-height-tight;
+
+  @include sm {
+    font-size: $font-size-sm;
+  }
+}
+
+.h-institution {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0 0 $space-md 0;
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+}
+
+.h-details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  li {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    line-height: $line-height-normal;
+    position: relative;
+    padding-left: $space-md;
+
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: $color-accent-primary;
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
